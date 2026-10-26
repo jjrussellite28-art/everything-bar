@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.6
+- Uninstall button in Settings (runs the uninstaller, then closes the bar).
+- `update.bat`: one double-click pulls the latest code, builds and starts the new installer.
+
 ## 0.3.5
 - Settings window is larger and has a fixed layout: title on top, scrolling list, version and Done always visible at the bottom.
 

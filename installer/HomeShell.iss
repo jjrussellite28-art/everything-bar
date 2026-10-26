@@ -8,7 +8,7 @@
 ; Kept the same as the first version so an update replaces it instead of installing twice.
 AppId={{6F3B1D0C-4E5A-4C8B-9A71-HOMESHELL0001}
 AppName={#AppName}
-AppVersion=0.3.5
+AppVersion=0.3.6
 DefaultDirName={localappdata}\HomeShell
 DefaultGroupName={#AppName}
 PrivilegesRequired=lowest

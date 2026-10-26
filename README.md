@@ -26,10 +26,13 @@ flutter build windows --release
 
 Then compile `installer/HomeShell.iss` with Inno Setup 6 to produce the installer.
 
+## Update in one step
+Double-click `update.bat` in the project folder. It gets the latest code, builds it, makes the installer and starts it (Flutter and Inno Setup 6 must be installed).
+
 ## Privacy and removal
 - **No internet.** Everything Bar makes no network connections and has no telemetry or accounts.
 - **No admin rights, drivers or services.** It is an ordinary program for your Windows user.
 - **What it touches.** Its program folder (`%LOCALAPPDATA%\HomeShell`), your saved items and settings (`%APPDATA%\HomeShell`), and one startup entry (`HKCU\Software\Microsoft\Windows\CurrentVersion\Run`, value `HomeShell`).
 - **Pausing apps.** The freeze feature pauses one program at a time and resumes it when you switch back. If the bar ever closes unexpectedly, the next start (or the uninstaller) resumes anything left paused.
-- **Remove everything.** Windows Settings, Apps, Installed apps, Everything Bar, Uninstall. Choose **Yes** when asked to remove saved items and nothing is left behind.
+- **Remove everything.** The Uninstall button in the bar's Settings, or Windows Settings, Apps, Installed apps, Everything Bar, Uninstall. Choose **Yes** when asked to remove saved items and nothing is left behind.
 - **By hand (if ever needed).** End `Everything Bar.exe` in Task Manager, delete `%LOCALAPPDATA%\HomeShell` and `%APPDATA%\HomeShell`, and delete the `HomeShell` value under the Run key above.

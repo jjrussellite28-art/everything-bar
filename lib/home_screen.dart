@@ -871,6 +871,40 @@ class _SettingsDialogState extends State<_SettingsDialog> {
 
   static const _holds = [0, 250, 500, 1000, 1500, 2000, 3000];
 
+  /// Runs the uninstaller that the installer put next to the program.
+  Future<void> _uninstall() async {
+    final dir = File(Platform.resolvedExecutable).parent.path;
+    final un = File('$dir\\unins000.exe');
+    if (!un.existsSync()) {
+      setState(() => _status = 'No uninstaller here. It only exists in the installed copy '
+          '(or use Windows Settings > Apps).');
+      return;
+    }
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Uninstall Everything Bar?'),
+        content: const Text('This closes the bar and removes it from this PC. '
+            'You will be asked whether to also remove your saved items.'),
+        actions: [
+          TextButton(
+            autofocus: true,
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Cancel', style: TextStyle(fontSize: 18)),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: const Text('Uninstall', style: TextStyle(fontSize: 18)),
+          ),
+        ],
+      ),
+    );
+    if (ok != true) return;
+    Freezer.instance.thawAll();
+    await Process.start(un.path, const [], mode: ProcessStartMode.detached);
+    await windowManager.destroy();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -1033,6 +1067,12 @@ class _SettingsDialogState extends State<_SettingsDialog> {
               Row(children: [
                 Text('Everything Bar $kAppVersion', style: const TextStyle(fontSize: 14, color: Colors.white38)),
                 const Spacer(),
+                TextButton.icon(
+                  onPressed: _recording ? null : _uninstall,
+                  icon: const Icon(Icons.delete_outline_rounded),
+                  label: const Text('Uninstall', style: TextStyle(fontSize: 18)),
+                ),
+                const SizedBox(width: 12),
                 TextButton(
                   onPressed: _recording ? null : () => Navigator.pop(context),
                   child: const Text('Done', style: TextStyle(fontSize: 20)),
