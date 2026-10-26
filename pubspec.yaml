@@ -1,5 +1,5 @@
 name: home_shell
-description: A controller-friendly home screen for Windows (remote, Xbox, PlayStation, keyboard and mouse).
+description: Everything Bar - a small always-ready bar for Windows, controlled with a controller, remote or keyboard.
 publish_to: none
 version: 0.3.6+9
 
