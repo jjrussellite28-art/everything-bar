@@ -922,13 +922,17 @@ class _SettingsDialogState extends State<_SettingsDialog> {
         width: (MediaQuery.of(context).size.width * 0.85).clamp(660.0, 960.0),
         child: Padding(
           padding: const EdgeInsets.all(18),
-          child: SingleChildScrollView(
-           child: Column(
+          child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text('Settings', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600)),
               const SizedBox(height: 8),
+              Flexible(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
               ListTile(
                 autofocus: true,
                 enabled: !_recording,
@@ -1020,6 +1024,10 @@ class _SettingsDialogState extends State<_SettingsDialog> {
                   style: TextStyle(fontSize: 14, color: Colors.white54),
                 ),
               ),
+                    ],
+                  ),
+                ),
+              ),
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
@@ -1028,7 +1036,6 @@ class _SettingsDialogState extends State<_SettingsDialog> {
                 ),
               ),
             ],
-           ),
           ),
         ),
       ),

@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.4
+- Settings: the title and the Done button stay in place; only the list in between scrolls, so Done is never cut off.
+
 ## 0.3.3
 - Settings and quick settings windows are bigger (most of the screen) and scroll when needed.
 
