@@ -99,7 +99,7 @@ class ShellMode {
     final d = ui.PlatformDispatcher.instance.displays.first;
     final sw = d.size.width / d.devicePixelRatio;
     final sh = d.size.height / d.devicePixelRatio;
-    await windowManager.setSize(ui.Size((sw * 0.8).clamp(780.0, 1100.0), (sh * 0.85).clamp(640.0, 900.0)));
+    await windowManager.setSize(ui.Size((sw * 0.9).clamp(780.0, 1280.0), (sh * 0.92).clamp(640.0, 960.0)));
     await windowManager.setAlignment(Alignment.center);
     await windowManager.show();
     await windowManager.focus();

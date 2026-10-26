@@ -1,7 +1,7 @@
 name: home_shell
 description: A controller-friendly home screen for Windows (remote, Xbox, PlayStation, keyboard and mouse).
 publish_to: none
-version: 0.3.4+7
+version: 0.3.5+8
 
 environment:
   sdk: ^3.8.1

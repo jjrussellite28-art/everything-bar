@@ -82,6 +82,9 @@ class ShellShortcut {
   }
 }
 
+/// Shown in Settings so you can tell which version is running.
+const String kAppVersion = '0.3.5';
+
 /// Saved in %APPDATA%\HomeShell\settings.json.
 class ShellSettings {
   ShellSettings._();

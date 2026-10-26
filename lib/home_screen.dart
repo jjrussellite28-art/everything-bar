@@ -917,18 +917,20 @@ class _SettingsDialogState extends State<_SettingsDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final screen = MediaQuery.of(context).size;
     return Dialog(
+      insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       child: SizedBox(
-        width: (MediaQuery.of(context).size.width * 0.85).clamp(660.0, 960.0),
+        width: (screen.width * 0.9).clamp(660.0, 1000.0),
+        height: screen.height - 28,
         child: Padding(
           padding: const EdgeInsets.all(18),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text('Settings', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600)),
               const SizedBox(height: 8),
-              Flexible(
+              Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -1028,13 +1030,14 @@ class _SettingsDialogState extends State<_SettingsDialog> {
                   ),
                 ),
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
+              Row(children: [
+                Text('Everything Bar $kAppVersion', style: const TextStyle(fontSize: 14, color: Colors.white38)),
+                const Spacer(),
+                TextButton(
                   onPressed: _recording ? null : () => Navigator.pop(context),
-                  child: const Text('Done', style: TextStyle(fontSize: 18)),
+                  child: const Text('Done', style: TextStyle(fontSize: 20)),
                 ),
-              ),
+              ]),
             ],
           ),
         ),

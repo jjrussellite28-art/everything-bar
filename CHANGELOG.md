@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.5
+- Settings window is larger and has a fixed layout: title on top, scrolling list, version and Done always visible at the bottom.
+
 ## 0.3.4
 - Settings: the title and the Done button stay in place; only the list in between scrolls, so Done is never cut off.
 
