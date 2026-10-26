@@ -29,6 +29,7 @@ jobs:
             }
           }
           if ($errs.Count -gt 0) { exit 1 }
+          exit 0   # warnings and hints are fine; only errors fail
       - name: Build
         shell: pwsh
         run: |
