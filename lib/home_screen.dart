@@ -919,10 +919,11 @@ class _SettingsDialogState extends State<_SettingsDialog> {
   Widget build(BuildContext context) {
     return Dialog(
       child: SizedBox(
-        width: 660,
+        width: (MediaQuery.of(context).size.width * 0.85).clamp(660.0, 960.0),
         child: Padding(
           padding: const EdgeInsets.all(18),
-          child: Column(
+          child: SingleChildScrollView(
+           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -1027,6 +1028,7 @@ class _SettingsDialogState extends State<_SettingsDialog> {
                 ),
               ),
             ],
+           ),
           ),
         ),
       ),

@@ -95,7 +95,11 @@ class ShellMode {
 
   /// A roomy window for dialogs; call [applyBar] afterwards to shrink back.
   Future<void> enterBig() async {
-    await windowManager.setSize(const ui.Size(780, 640));
+    // Big enough for the settings lists: most of the screen, up to a limit.
+    final d = ui.PlatformDispatcher.instance.displays.first;
+    final sw = d.size.width / d.devicePixelRatio;
+    final sh = d.size.height / d.devicePixelRatio;
+    await windowManager.setSize(ui.Size((sw * 0.8).clamp(780.0, 1100.0), (sh * 0.85).clamp(640.0, 900.0)));
     await windowManager.setAlignment(Alignment.center);
     await windowManager.show();
     await windowManager.focus();

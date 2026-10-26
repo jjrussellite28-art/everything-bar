@@ -36,7 +36,7 @@ class QuickSettingsDialog extends StatelessWidget {
     final pad = WindowsGamepadService.instance;
     return Dialog(
       child: SizedBox(
-        width: 520,
+        width: 640,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

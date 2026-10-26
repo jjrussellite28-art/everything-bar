@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.3
+- Settings and quick settings windows are bigger (most of the screen) and scroll when needed.
+
 ## 0.3.2
 - Faster start after sign-in: optional installer choice removes Windows' ~10 second startup-app delay; the bar's own startup no longer waits on registry checks.
 
