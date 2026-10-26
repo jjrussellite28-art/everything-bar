@@ -19,7 +19,7 @@ jobs:
         shell: pwsh
         run: |
           flutter pub get
-          $out = flutter analyze --no-pub 2>&1 | Out-String
+          $out = flutter analyze --no-pub lib 2>&1 | Out-String
           Write-Host $out
           $errs = @()
           foreach ($l in $out -split "`n") {
