@@ -8,7 +8,7 @@
 ; Kept the same as the first version so an update replaces it instead of installing twice.
 AppId={{6F3B1D0C-4E5A-4C8B-9A71-HOMESHELL0001}
 AppName={#AppName}
-AppVersion=0.2.0
+AppVersion=0.3.0
 DefaultDirName={localappdata}\HomeShell
 DefaultGroupName={#AppName}
 PrivilegesRequired=lowest
@@ -48,10 +48,20 @@ Filename: "{app}\{#AppExe}"; Description: "Start {#AppName} now"; Flags: nowait 
 Filename: "{app}\{#AppExe}"; Parameters: "--thaw"; Flags: runhidden waituntilterminated; RunOnceId: "ThawEverythingBar"
 Filename: "{sys}\taskkill.exe"; Parameters: "/F /IM ""{#AppExe}"""; Flags: runhidden; RunOnceId: "KillEverythingBar"
 
+[UninstallDelete]
+; Anything left in the program folder goes too.
+Type: filesandordirs; Name: "{app}"
+
 [Code]
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 begin
   if CurUninstallStep = usPostUninstall then
-    if MsgBox('Also delete your saved bar items and settings?', mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
+  begin
+    if UninstallSilent then
+      DelTree(ExpandConstant('{userappdata}\HomeShell'), True, True, True)
+    else if MsgBox('Also remove your saved bar items, settings and cached icons?' + #13#10 + #13#10 +
+                   'Choose Yes for a complete clean removal (nothing of Everything Bar is left on this PC).' + #13#10 +
+                   'Choose No to keep them in case you reinstall.', mbConfirmation, MB_YESNO) = IDYES then
       DelTree(ExpandConstant('{userappdata}\HomeShell'), True, True, True);
+  end;
 end;
