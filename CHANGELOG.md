@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.2
+- Faster start after sign-in: optional installer choice removes Windows' ~10 second startup-app delay; the bar's own startup no longer waits on registry checks.
+
 ## 0.3.1
 - Only one Everything Bar runs; starting it again just brings the running one forward.
 - Start with Windows is repaired automatically (missing entry, switched off by Windows, or pointing at an old copy) unless you turned it off yourself. The installer also switches Windows' own startup toggle on.

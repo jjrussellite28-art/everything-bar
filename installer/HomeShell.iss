@@ -8,7 +8,7 @@
 ; Kept the same as the first version so an update replaces it instead of installing twice.
 AppId={{6F3B1D0C-4E5A-4C8B-9A71-HOMESHELL0001}
 AppName={#AppName}
-AppVersion=0.3.1
+AppVersion=0.3.2
 DefaultDirName={localappdata}\HomeShell
 DefaultGroupName={#AppName}
 PrivilegesRequired=lowest
@@ -23,6 +23,7 @@ RestartApplications=no
 
 [Tasks]
 Name: "desktopicon"; Description: "Put an Everything Bar shortcut on the desktop"
+Name: "fastlogon"; Description: "Start sooner after sign-in (removes the ~10 second wait Windows adds before startup apps)"
 
 [InstallDelete]
 ; Old name from the first version.
@@ -42,6 +43,9 @@ Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: 
 
 ; Windows' own on/off switch for startup apps: make sure it says "on".
 Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run"; ValueType: binary; ValueName: "HomeShell"; ValueData: 02 00 00 00 00 00 00 00 00 00 00 00; Flags: uninsdeletevalue
+
+; Windows waits ~10 s after the desktop appears before starting startup apps. 0 = no wait.
+Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize"; ValueType: dword; ValueName: "StartupDelayInMSec"; ValueData: 0; Tasks: fastlogon; Flags: uninsdeletevalue
 
 [Run]
 Filename: "{app}\{#AppExe}"; Description: "Start {#AppName} now"; Flags: nowait postinstall skipifsilent

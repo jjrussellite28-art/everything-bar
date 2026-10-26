@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -26,9 +27,6 @@ Future<void> main(List<String> args) async {
   }
   await ShellSettings.instance.load();
   Freezer.instance.resumeStale();
-  if (Platform.isWindows && !ShellSettings.instance.autostartOff) {
-    await Autostart.ensure();
-  }
   if (Platform.isWindows && !ShellSettings.instance.autostartDone) {
     // First run: start with Windows from now on (can be switched off in Settings).
     await Autostart.set(true);
@@ -59,6 +57,10 @@ Future<void> main(List<String> args) async {
     CursorAutoHide.instance.start();
   }
   runApp(const HomeShellApp());
+  // After the window is up, so a slow registry check never delays the bar.
+  if (Platform.isWindows && !ShellSettings.instance.autostartOff) {
+    unawaited(Autostart.ensure());
+  }
 }
 
 class HomeShellApp extends StatelessWidget {
