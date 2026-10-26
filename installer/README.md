@@ -1,7 +1,7 @@
 # Install Everything Bar (safe, per-user)
 
 1. Install Inno Setup 6 (free): https://jrsoftware.org/isdl.php
-2. In PowerShell: `cd C:\debrifyy\shell\home_shell` then `flutter build windows --release`
+2. In PowerShell: `cd C:\everything-bar` then `flutter build windows --release`
 3. Open `installer\HomeShell.iss` in Inno Setup and press Compile (Ctrl+F9).
 4. Run `installer\output\EverythingBar-Setup.exe`.
 
