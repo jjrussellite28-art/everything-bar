@@ -1,0 +1,41 @@
+name: Check build
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - name: Create Windows project files
+        run: flutter create --platforms=windows .
+      - name: Analyze
+        shell: pwsh
+        run: |
+          flutter pub get
+          $out = flutter analyze --no-pub 2>&1 | Out-String
+          Write-Host $out
+          $errs = @()
+          foreach ($l in $out -split "`n") {
+            if ($l -match '^\s*error\s+-\s+(.+?)\s+-\s+(\S+?):(\d+):(\d+)\s+-\s+(\S+)') {
+              $errs += $l.Trim()
+              Write-Host "::error file=$($Matches[2]),line=$($Matches[3]),col=$($Matches[4])::$($Matches[1]) ($($Matches[5]))"
+            }
+          }
+          if ($errs.Count -gt 0) { exit 1 }
+      - name: Build
+        shell: pwsh
+        run: |
+          $out = flutter build windows --release 2>&1 | Out-String
+          Write-Host $out
+          if ($LASTEXITCODE -ne 0) {
+            $tail = ($out -split "`n" | Select-Object -Last 40) -join '%0A'
+            Write-Host "::error::BUILD FAILED%0A$tail"
+            exit 1
+          }
