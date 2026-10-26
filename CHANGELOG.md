@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1
+- Only one Everything Bar runs; starting it again just brings the running one forward.
+- Start with Windows is repaired automatically (missing entry, switched off by Windows, or pointing at an old copy) unless you turned it off yourself. The installer also switches Windows' own startup toggle on.
+
 ## 0.3.0
 - Stricter freeze: waits for controller buttons to be released before waking or opening an app; the app you left stays paused until you switch back (can be turned off); paused apps are marked on the bar.
 - Fixed a hang caused by switching to a paused window.

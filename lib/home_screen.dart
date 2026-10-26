@@ -956,7 +956,11 @@ class _SettingsDialogState extends State<_SettingsDialog> {
                     style: TextStyle(fontSize: 15)),
                 onChanged: (v) async {
                   final ok = await Autostart.set(v);
-                  if (mounted && ok) setState(() => _autostart = v);
+                  if (mounted && ok) {
+                    setState(() => _autostart = v);
+                    ShellSettings.instance.autostartOff = !v;
+                    ShellSettings.instance.save();
+                  }
                 },
               ),
               SwitchListTile(

@@ -9,10 +9,16 @@ import 'home_screen.dart';
 import 'autostart.dart';
 import 'freezer.dart';
 import 'settings.dart';
+import 'single_instance.dart';
 import 'shell_mode.dart';
 
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  if (!args.contains('--thaw') && !SingleInstance.acquire()) {
+    // Already running: bring that one forward and quit.
+    SingleInstance.showExisting();
+    exit(0);
+  }
   if (args.contains('--thaw')) {
     // Used by the uninstaller: resume anything left paused, then quit.
     Freezer.instance.resumeStale();
@@ -20,6 +26,9 @@ Future<void> main(List<String> args) async {
   }
   await ShellSettings.instance.load();
   Freezer.instance.resumeStale();
+  if (Platform.isWindows && !ShellSettings.instance.autostartOff) {
+    await Autostart.ensure();
+  }
   if (Platform.isWindows && !ShellSettings.instance.autostartDone) {
     // First run: start with Windows from now on (can be switched off in Settings).
     await Autostart.set(true);

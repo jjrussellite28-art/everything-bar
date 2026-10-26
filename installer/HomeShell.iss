@@ -8,7 +8,7 @@
 ; Kept the same as the first version so an update replaces it instead of installing twice.
 AppId={{6F3B1D0C-4E5A-4C8B-9A71-HOMESHELL0001}
 AppName={#AppName}
-AppVersion=0.3.0
+AppVersion=0.3.1
 DefaultDirName={localappdata}\HomeShell
 DefaultGroupName={#AppName}
 PrivilegesRequired=lowest
@@ -39,6 +39,9 @@ Name: "{autodesktop}\{#AppName}"; Filename: "{app}\{#AppExe}"; Tasks: desktopico
 [Registry]
 ; Same startup entry the app uses itself; removed on uninstall.
 Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "HomeShell"; ValueData: """{app}\{#AppExe}"""; Flags: uninsdeletevalue
+
+; Windows' own on/off switch for startup apps: make sure it says "on".
+Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run"; ValueType: binary; ValueName: "HomeShell"; ValueData: 02 00 00 00 00 00 00 00 00 00 00 00; Flags: uninsdeletevalue
 
 [Run]
 Filename: "{app}\{#AppExe}"; Description: "Start {#AppName} now"; Flags: nowait postinstall skipifsilent

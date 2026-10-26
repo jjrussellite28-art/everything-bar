@@ -105,6 +105,9 @@ class ShellSettings {
   /// Start-with-Windows was switched on automatically the first time.
   bool autostartDone = false;
 
+  /// The user switched "Start with Windows" off on purpose.
+  bool autostartOff = false;
+
   static File get _file => File('${TileStore.dir}\\settings.json');
 
   Future<void> load() async {
@@ -120,6 +123,7 @@ class ShellSettings {
           keepFrozen = j['keepFrozen'] as bool? ?? keepFrozen;
           pinned = j['pinned'] as bool? ?? pinned;
           autostartDone = j['autostartDone'] as bool? ?? autostartDone;
+          autostartOff = j['autostartOff'] as bool? ?? autostartOff;
         }
       }
     } catch (_) {}
@@ -136,6 +140,7 @@ class ShellSettings {
           'keepFrozen': keepFrozen,
           'pinned': pinned,
           'autostartDone': autostartDone,
+          'autostartOff': autostartOff,
         }),
       );
     } catch (_) {}
